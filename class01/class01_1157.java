@@ -33,7 +33,7 @@ public class class01_1157 {
         }
         
         if(duplication == false){
-            System.out.println((char)(maxIndex - 'a'));
+            System.out.println((char)(maxIndex + 'a' - 32));
         }
         else{
             System.out.println("?");
