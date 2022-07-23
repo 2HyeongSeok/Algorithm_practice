@@ -1,0 +1,13 @@
+/class01_1000.class
+/class01_1001.class
+/class01_1008.class
+/class01_1152.class
+/class01_1157.class
+/class01_1330.class
+/class01_1546.class
+
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
