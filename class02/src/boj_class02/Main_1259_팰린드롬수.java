@@ -1,4 +1,4 @@
-package class_02;
+package boj_class02;
 
 import java.io.BufferedReader;
 import java.io.IOException;
