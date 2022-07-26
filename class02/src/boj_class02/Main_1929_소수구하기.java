@@ -15,6 +15,7 @@ public class Main_1929_소수구하기 {
 		boolean isPrime;
 		
 		for(int i = min; i <= max; i++) {
+			if(i == 1) continue;
 			isPrime = true;
 			for(int j = 2; j <= (int)Math.sqrt(i); j++) {
 				if(i % j == 0) {
