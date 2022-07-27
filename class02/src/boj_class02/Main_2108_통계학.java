@@ -56,7 +56,6 @@ public class Main_2108_통계학 {
 			sb.append(mostArr.get(0)).append("\n");
 		else {
 			Collections.sort(mostArr);
-			System.out.println(mostArr);
 			sb.append(mostArr.get(1)).append("\n");
 		}
 
