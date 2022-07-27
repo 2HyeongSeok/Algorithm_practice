@@ -26,53 +26,5 @@ public class Main_2231_분해합 {
 			sb.append(0);
 		
 		System.out.println(sb);
-		
-//		for(int i = 0; i <= num; i++) {
-//			if(flag) {
-//				if(num == 1000000) {
-//					i = 999900;
-//					val = i;
-//					base = 100000;
-//				}else if(num >= 100000) {
-//					i = 99900;
-//					val = i;
-//					base = 10000;
-//				}else if(num >= 10000) {
-//					i = 9900;
-//					val = i;
-//					base = 1000;
-//				}else if(num >= 1000) {
-//					i = 900;
-//					val = i;
-//					base = 100;
-//				}else if(num >= 100) {
-//					i = 90;
-//					val = i;
-//					base = 10;
-//				}else {
-//					val = i;
-//					base = 1;
-//				}
-//				flag = false;
-//			}
-//			
-//			int j = i;
-//			while(base >= 1) {
-//				val += j / base;
-//				j %= base;
-//				base /= 10;
-//			}
-//			
-//			if(val == num) {
-//				sb.append(val);
-//				break;
-//			}
-//			
-//		}
-//		System.out.println(sb.toString());
-//		if(sb.toString() == null)
-//			sb.append("0");
-//		
-//		System.out.println(sb);
 	}
 }
