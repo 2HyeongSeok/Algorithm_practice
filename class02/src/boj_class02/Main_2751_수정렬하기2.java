@@ -3,7 +3,6 @@ package boj_class02;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Main_2751_수정렬하기2 {
 	public static int[] arr;
@@ -11,6 +10,7 @@ public class Main_2751_수정렬하기2 {
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		int size = Integer.parseInt(br.readLine());
 		
 		arr = new int[size];
@@ -22,8 +22,10 @@ public class Main_2751_수정렬하기2 {
 		mergeSort(0, size - 1);
 		
 		for(int i = 0; i < size; i++) {
-			System.out.println(arr[i]);
+			sb.append(arr[i]).append("\n");
 		}
+		
+		System.out.println(sb);
 	}
 	
 	// merge sort
@@ -62,7 +64,5 @@ public class Main_2751_수정렬하기2 {
 		for(int i = left; i <= right; i++) {
 			arr[i] = sorted[i];
 		}
-		
-		System.out.println(Arrays.toString(arr));
 	}
 }
