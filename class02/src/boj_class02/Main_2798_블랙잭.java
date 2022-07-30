@@ -13,7 +13,6 @@ public class Main_2798_블랙잭 {
 		int M = Integer.parseInt(line[1]);
 		
 		int[] arr = new int[N];
-		boolean[] visited = new boolean[N];
 		line = br.readLine().split(" ");
 		for(int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(line[i]);
@@ -34,6 +33,4 @@ public class Main_2798_블랙잭 {
 		
 		System.out.println(max);
 	}
-	
-	
 }
