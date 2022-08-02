@@ -11,7 +11,6 @@ public class Solution_1208_Flatten {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-
 		for(int test_case = 1; test_case <= 10; test_case++){
 			int dumpNum = Integer.parseInt(br.readLine());
 			int[] dumpArr = new int[100];
@@ -21,10 +20,8 @@ public class Solution_1208_Flatten {
 			}
 			sb.append("#").append(test_case).append(" ");
 			dump(dumpArr, dumpNum);
-			
-			
 		}
-
+		
 		System.out.println(sb);
 	}
 	
