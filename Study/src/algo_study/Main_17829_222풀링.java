@@ -63,7 +63,6 @@ public class Main_17829_222풀링 {
 				}
 			}
 		}
-		
 		System.out.println(last);
 	}
 }

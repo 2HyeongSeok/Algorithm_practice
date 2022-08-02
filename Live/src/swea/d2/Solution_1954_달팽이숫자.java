@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class Solution_1954_달팽이숫자 {
 	static Queue<Integer> queue = new LinkedList<>();
@@ -41,7 +40,6 @@ public class Solution_1954_달팽이숫자 {
 		while(col < N - index) {
 			finalArr[row][col++] = queue.poll();
 		}
-		System.out.println("1. row : " + row + ", col : " + col);
 		insert2(row + 1, col - 1, N, index); // col++ 때문에 col-1 해줘야함
 	}
 	static void insert2(int row, int col, int N, int index) {
@@ -50,7 +48,6 @@ public class Solution_1954_달팽이숫자 {
 		while(row < N - index) {
 			finalArr[row++][col] = queue.poll();
 		}
-		System.out.println("2. row : " + row + ", col : " + col);
 		insert3(row - 1, col - 1, N, index); // row++ 때문에 row-1 해줘야함
 	}
 	static void insert3(int row, int col, int N, int index) {
@@ -59,7 +56,6 @@ public class Solution_1954_달팽이숫자 {
 		while(col >= 0 + index) {
 			finalArr[row][col--] = queue.poll();
 		}
-		System.out.println("3. row : " + row + ", col : " + col);
 		insert4(row - 1, col + 1, N, index + 1); // col-- 때문에 col+1 해줘야함
 	}
 	static void insert4(int row, int col, int N, int index) {
@@ -68,7 +64,6 @@ public class Solution_1954_달팽이숫자 {
 		while(row >= 0 + index) {
 			finalArr[row--][col] = queue.poll();
 		}
-		System.out.println("4. row : " + row + ", col : " + col);
 		insert1(row + 1, col + 1, N, index); // row-- 때문에 row+1 해줘야함
 	}
 }
