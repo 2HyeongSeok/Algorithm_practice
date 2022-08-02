@@ -3,7 +3,6 @@ package swea.d4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Solution_1210_Ladder1 {
 	static StringBuilder sb = new StringBuilder();
@@ -22,7 +21,6 @@ public class Solution_1210_Ladder1 {
 				// 도착지점 좌표 찾음 (99, resultIndex)
 				if(maps[99][i].equals("2")) resultIndex = i; 
 			
-			System.out.println("resultIndex : " + resultIndex);
 			sb.append("#").append(t).append(" ");
 			move(maps, 99, resultIndex);
 		}
@@ -40,7 +38,6 @@ public class Solution_1210_Ladder1 {
 		// 이전에 왔던 길이면 0으로 바꿔주는게 좋을듯?
 		
 		maps[row][col] = "0";
-		System.out.println("row : " + row + ", col : " + col);
 		if(col == 0) {
 			if(maps[row][col + 1].equals("1")) move(maps, row, col + 1);
 			else if(maps[row - 1][col].equals("1")) move(maps, row - 1, col);
