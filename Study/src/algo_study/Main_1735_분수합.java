@@ -16,30 +16,23 @@ public class Main_1735_분수합 {
 		int c = Integer.parseInt(line2[0]);
 		int d = Integer.parseInt(line2[1]);
 		
-		// a, b 약분, c, d 약분
-		int min = Math.min(a, b);
-		for(int i = min; i >= 1; i--) {
-			if(a % i == 0 && b % i == 0) {
-				a /= i;
-				b /= i;
-				break;
-			}
-		}
-		min = Math.min(c, d);
-		for(int i = min; i >= 1; i--) {
-			if(c % i == 0 && d % i == 0) {
-				c /= i;
-				d /= i;
-				break;
-			}
-		}
-		
-		int temp = b; // b 값이 바뀌기 때문에 미리 저장!
+		int bTemp = b; // b 값이 바뀌기 때문에 미리 저장!
 		a *= d;
 		b *= d;
-		c *= b;
-		d *= b;
+		c *= bTemp;
+		d *= bTemp;
 		
+		int child = a + c;
+		int parent = b;
 		
+		// gcd
+		int gcdVal = gcd(child, parent);
+		System.out.println(child / gcdVal + " " + parent / gcdVal);
+	}
+	
+	static int gcd(int a, int b) {
+		if(a % b == 0)
+			return b;
+		return gcd(b, a % b);
 	}
 }
