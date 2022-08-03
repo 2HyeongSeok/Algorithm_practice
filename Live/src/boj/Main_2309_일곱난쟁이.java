@@ -10,7 +10,6 @@ public class Main_2309_일곱난쟁이 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-		StringTokenizer st;
 		
 		int[] hList = new int[9];
 		int total9 = 0;
@@ -18,38 +17,22 @@ public class Main_2309_일곱난쟁이 {
 			hList[i] = Integer.parseInt(br.readLine());
 			total9 += hList[i];
 		}
-		int remain = total9 % 100;
+		Arrays.sort(hList); // 오름차순 정렬
+		int remain = total9 - 100; // 100 넘어가는 만큼을 찾아야함
 		
-		int[] resList = new int[7];
-		int a = -1;
-		int b = -1;
-		boolean isFin = false;
+		// 난쟁이들 키 순회하면서 remain과 같아지는 두 명 찾고, 그 둘을 제외한 사람들의 키를 StringBuilder에 저장 후 출력
 		for(int i = 0; i < 9; i++) {
-			int sum = hList[i];
 			for(int j = 0; j < 9; j++) {
 				if(i == j) continue;
-				if(sum + hList[j] == remain) {
-					a = i;
-					b = j;
-					isFin = true;
-					break;
+				if(hList[i] + hList[j] == remain) {
+					for(int k = 0; k < 9; k++) {
+						if(k == i || k == j) continue;
+						sb.append(hList[k]).append("\n");
+					}
+					System.out.println(sb);
+					return;
 				}
 			}
-			if(isFin) break;
 		}
-		
-		int index = 0;
-		for(int i = 0; i < 9; i++) {
-			if(i == a || i == b) continue;
-			resList[index++] = hList[i];
-		}
-		
-		Arrays.sort(resList);
-		
-		for(int i = 0; i < 7; i++) {
-			sb.append(resList[i]).append("\n");
-		}
-		
-		System.out.println(sb);
 	}
 }
