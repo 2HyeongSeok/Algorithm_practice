@@ -3,7 +3,6 @@ package boj;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main_2527_직사각형 {
@@ -37,10 +36,10 @@ public class Main_2527_직사각형 {
 					|| (firstX[1] == secondX[0] && firstY[1] == secondY[0])) {
 				// 한 점에서 만남
 				sb.append("c").append("\n");
-			}else if((firstX[0] == secondX[1] && ((firstY[1] > secondY[0] && firstY[1] <= secondY[1]) || (firstY[0] >= secondY[0] && firstY[0] < secondY[1])))
-					|| (firstX[1] == secondX[0] && ((firstY[1] > secondY[0] && firstY[1] <= secondY[1]) || (firstY[0] >= secondY[0] && firstY[0] < secondY[1])))
-					|| (firstY[0] == secondY[1] && ((firstX[1] > secondX[0] && firstX[1] <= secondX[1]) || (firstX[0] >= secondX[0] && firstX[0] < secondX[1])))
-					|| (firstY[1] == secondY[0] && ((firstX[1] > secondX[0] && firstX[1] <= secondX[1]) || (firstX[0] >= secondX[0] && firstX[0] < secondX[1])))) {
+			}else if(firstX[0] == secondX[1] || firstX[1] == secondX[0] || firstY[0] == secondY[1] || firstY[1] == secondY[0]) {
+				// 이미 앞에서 겹치는 경우와 한 점에서 만나는 경우를 배제했으므로
+				// 서로의 반대편 x좌표끼리, y좌표끼리 같은지를 판단하면 된다!
+				
 				// 선분
 				sb.append("b").append("\n");
 			}else {
