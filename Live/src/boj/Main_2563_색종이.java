@@ -15,6 +15,7 @@ public class Main_2563_색종이 {
 		int[] col = new int[N + 1]; // col 좌표 정보
 		int[][] map = new int[101][101];
 
+		int size = 0;
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 			row[i] = Integer.parseInt(st.nextToken());
@@ -22,17 +23,14 @@ public class Main_2563_색종이 {
 			
 			for (int m = row[i]; m < row[i] + 10; m++) {
 				for (int n = col[i]; n < col[i] + 10; n++) {
-					map[m][n] = 1;
+					if(map[m][n] != 1) {
+						size++;
+						map[m][n] = 1;
+					}
 				}
 			}
 		}
 		
-		int size = 0;
-		for(int i = 1; i <= 100; i++) {
-			for(int j = 1; j <= 100; j++) {
-				if(map[i][j] == 1) size++;
-			}
-		}
 		System.out.println(size);
 	}
 }
