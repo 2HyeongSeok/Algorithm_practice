@@ -3,6 +3,8 @@ package boj;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main_16926_배열돌리기1 {
@@ -29,9 +31,7 @@ public class Main_16926_배열돌리기1 {
 		}
 		
 		// R번 회전
-		for(int i = 0; i < R; i++) {
-			rotation(N, M, 0);
-		}
+		rotation(N, M, R, 0);
 		
 		// 출력부
 		for(int i = 0; i < N; i++) {
@@ -44,27 +44,38 @@ public class Main_16926_배열돌리기1 {
 		System.out.println(sb);
 	}
 	
-	static void rotation(int N, int M, int index) {
+	static void rotation(int N, int M, int R, int index) {
 		// 기저조건
 		// min(N,M) mod 2 = 0의 제한이 존재하므로
 		if(index == minRC) {
 			return;
 		}
 		
-		// 회전
-		int temp = map[index][index];
-		for(int i = index; i < M - index - 1; i++) // index 행 왼쪽으로 보내기
-			map[index][i] = map[index][i + 1];
-		for(int i = index; i < N - index - 1; i++) // M - index 열 위로 보내기
-			map[i][M - index - 1] = map[i + 1][M - index - 1];
-		for(int i = M - index - 1; i > index; i--) {
-			map[N - index - 1][i] = map[N - index - 1][i - 1]; // N - index 행 오른쪽으로 보내기
-		}
-		for(int i = N - index - 1; i > index + 1; i--) { // index 열 아래로 보내기 ([index][index]는 temp이므로 따로 해줘야함)
-			map[i][index] = map[i - 1][index];
-		}
-		map[index + 1][index] = temp;
+		// 돌릴 map 정보 큐에 담기
+		Queue<Integer> queue = new ArrayDeque<>();
+		for(int i = index; i < M - index; i++)
+			queue.offer(map[index][i]); 
+		for(int i = index + 1; i < N - index; i++)
+			queue.offer(map[i][M - index - 1]);
+		for(int i = M - index - 2; i >= index; i--)
+			queue.offer(map[N - index - 1][i]);
+		for(int i = N - index - 2; i > index; i--)
+			queue.offer(map[i][index]);
 		
-		rotation(N, M, index + 1);
+		// 회전
+		for(int i = 0; i < R; i++)
+			queue.offer(queue.poll());
+		
+		// 회전 후 다시 map에 넣기
+		for(int i = index; i < M - index; i++) 
+			map[index][i] = queue.poll();
+		for(int i = index + 1; i < N - index; i++)
+			map[i][M - index - 1] = queue.poll();
+		for(int i = M - index - 2; i >= index; i--)
+			map[N - index - 1][i] = queue.poll();
+		for(int i = N - index - 2; i > index; i--) 
+			map[i][index] = queue.poll();
+		
+		rotation(N, M, R, index + 1);
 	}
 }
