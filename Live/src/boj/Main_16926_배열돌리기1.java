@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main_16929_배열돌리기1 {
+public class Main_16926_배열돌리기1 {
 	static int minRC; 
 	static int[][] map;
 	public static void main(String[] args) throws IOException {
