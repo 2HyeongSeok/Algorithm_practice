@@ -49,7 +49,7 @@ public class Solution_5215_햄버거다이어트_재귀 {
 		if(call == 0) return;
 		
 		for(int i = cnt; i < N; i++) {
-			if(isSelected[i]) return;
+			if(isSelected[i]) continue;
 			
 			if(totalKcal + kcals[i] <= L) { // 이번꺼 더해도 된다!
 				isSelected[i] = true;
