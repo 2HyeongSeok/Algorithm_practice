@@ -46,7 +46,8 @@ public class Main_1541_잃어버린괄호 {
 			int numBack = numStack.poll();
 			operStack.poll();
 			
-			// 담겨있는 연산 부호는 -뿐이므로
+			// 담겨있는 연산 부호는 -뿐이므로 연산한 뒤 다시 제일 앞에 넣어줌
+			// 앞에서부터 계산해야 하기 때문
 			numStack.offerFirst(numFront - numBack);
 		}
 		
