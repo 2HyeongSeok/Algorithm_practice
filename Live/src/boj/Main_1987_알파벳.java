@@ -71,6 +71,7 @@ public class Main_1987_알파벳 {
 				count--;
 			}
 		}
+		
 		// 다 돌고 나면 저장!
 		maxMoved = maxMoved > count ? maxMoved : count;
 	}
