@@ -54,7 +54,8 @@ public class Main_1260_DFS와BFS {
 			sbBFS.append(next).append(" ");
 			
 			for(int i = 1; i <= N; i++) {
-				if(!visitedBFS[i] && vector[next][i] == 1) {
+				if(!visitedBFS[i] &&
+						vector[next][i] == 1) {
 					queue.offer(i);
 					visitedBFS[i] = true;
 				}
