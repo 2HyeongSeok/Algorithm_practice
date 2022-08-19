@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main_17135_캐슬디펜스 {
@@ -27,7 +26,6 @@ public class Main_17135_캐슬디펜스 {
 		int[][] tempMap = new int[N + 1][M];
 		selected = new int[3];
 
-		totalEnemy = 0;
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 			for (int j = 0; j < M; j++) {
@@ -45,8 +43,7 @@ public class Main_17135_캐슬디펜스 {
 
 	static void comb(int[][] tempMap, int cnt, int start) {
 		if (cnt == 3) {
-//			System.out.println(Arrays.toString(selected));
-			for (int i = 0; i < N + 1; i++) {
+			for (int i = 0; i < N + 1; i++) { // 맵 초기화
 				for (int j = 0; j < M; j++) {
 					map[i][j] = tempMap[i][j];
 				}
@@ -59,6 +56,7 @@ public class Main_17135_캐슬디펜스 {
 				attack();
 				move();
 			}
+			
 			maxKillCount = maxKillCount > killCount ? maxKillCount : killCount;
 
 			return;
@@ -72,9 +70,9 @@ public class Main_17135_캐슬디펜스 {
 
 	static void attack() {
 		ArrayList<Integer[]> rowColList = new ArrayList<>();
-		int distance = N + 1, left = M + 1, row = -1;
+		int distance = 2*N + 1, left = M + 1, row = -1;
 		for (int i = 0; i < 3; i++) {
-			distance = N + 1; // 가장 멀다고 가정
+			distance = 2*N + 1; // 가장 멀다고 가정
 			left = M + 1; // 가장 오른쪽 시작 가정
 			row = -1; // 가장 위 가정
 
@@ -84,8 +82,11 @@ public class Main_17135_캐슬디펜스 {
 						// 적과 i번째 궁수와의 거리
 						int tempD = Math.abs(N - m) + Math.abs(selected[i] - n);
 						if (tempD <= D) {
-							if (tempD <= distance) {
-								distance = tempD; // 가장 가까운 적 중에서
+							if (tempD < distance) {
+								distance = tempD; // 가장 가까운 적 갱신하면 현재 정보 저장
+								row = m;
+								left = n; 
+							}else if(tempD == distance) { // 가장 가까운 적이 여럿이면 더 왼쪽인걸로 저장
 								if (n < left) {
 									row = m;
 									left = n; // 가장 왼쪽 찾기
@@ -115,9 +116,9 @@ public class Main_17135_캐슬디펜스 {
 				enemyCount++; // 사라질 애들 카운팅
 		}
 
+		// 맵 덮어쓰기
 		for (int i = N - 2; i >= 0; i--) {
-			for (int j = 0; j < M; j++) {
-				// 어차피 N-1번째 줄은 성에 도달해서 사라질 예정이므로
+			for (int j = 0; j < M; j++) { 
 				map[i + 1][j] = map[i][j];
 			}
 		}
@@ -125,10 +126,5 @@ public class Main_17135_캐슬디펜스 {
 		for (int i = 0; i < M; i++) {
 			map[0][i] = 0;
 		}
-
-//		for(int i = 0; i < N; i++) {
-//			System.out.println(Arrays.toString(map[i]));
-//		}
-//		System.out.println();
 	}
 }
