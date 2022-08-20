@@ -51,7 +51,6 @@ public class Main_1697_숨바꼭질 {
 				queue = tempQueue;
 				tempQueue = new ArrayDeque<>();
 				time++; // 다음 너비 갈 때마다 1초씩 추가
-				System.out.println(queue + ", time : " + time);
 			}
 		}
 		
