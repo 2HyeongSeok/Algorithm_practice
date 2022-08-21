@@ -1,4 +1,4 @@
-package class03;
+package boj_class03;
 
 import java.io.BufferedReader;
 import java.io.IOException;
