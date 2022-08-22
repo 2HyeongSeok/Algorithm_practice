@@ -3,137 +3,78 @@ package boj_class03;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.StringTokenizer;
 
 public class Main_1107_리모컨 {
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
 
-		String strN = br.readLine(); // 마지막에 이 문자열 길이만큼 더해줄 것!
-		int N = Integer.parseInt(strN);
-		int M = Integer.parseInt(br.readLine());
-		
-		if(M == 0) {
-			System.out.println(strN.length());
+		String target = br.readLine(); // 이동하려는 채널
+		int targetNum = Integer.parseInt(target);
+
+		int M = Integer.parseInt(br.readLine()); // 고장난 버튼 수
+
+		if (M == 0) {
+			int min = target.length() < Math.abs(targetNum - 100) ? target.length() : Math.abs(targetNum - 100);
+			System.out.println(min);
+			return;
+		}
+
+		String broken = br.readLine(); // 고장난 채널들(번호 String)
+
+		if (M == 10) {
+			System.out.println(Math.abs(targetNum - 100));
 			return;
 		}
 		
-		st = new StringTokenizer(br.readLine(), " ");
-		HashSet<Integer> brokenSet = new HashSet<>();
-		for (int i = 0; i < M; i++) {
-			brokenSet.add(Integer.parseInt(st.nextToken()));
-		}
-		
-		int diff = Math.abs(N - 100);
-
-		if (N == 100) {
+		if (targetNum == 100) {
 			System.out.println(0);
 			return;
 		}
 
-		if (M == 10) {
-			System.out.println(diff);
-			return;
-		}
+		int onlyUpDown = Math.abs(targetNum - 100);
 		
-		int temp;
-		int resultPLUS = 0;
-		int resultMINUS = 0;
-		int strLen = strN.length();
-		
-		// 큰 쪽으로 찾기
-		int tempN = N;
-		boolean okFlag = true;
-		for (int i = strLen - 1; i >= 0; i--) {
-			temp = tempN / (int)Math.pow(10, i); 
-
-			if (brokenSet.contains(temp)) { // 고장난 키
-				for(int k = 1; k <= 9; k++) {
-					if(temp + k <= 9) { // 큰 수중에 제일 작은 값 찾기 위함
-						if (!brokenSet.contains(temp + k)) {
-							temp += k;
-							break;
-						}
-					}else { 
-						int ten = (temp + k) / 10;
-						int one = (temp + k) % 10;
-						if (!brokenSet.contains(ten) && !brokenSet.contains(one)) {
-							temp = (temp + k);
-							break;
-						}
-					}
-					
-				}
+		// 이동하려는 채널보다 작은 쪽
+		int minNum = 1000001, minToUp = 0, len = 0;
+		for(int i = targetNum; i >= 0; i--) {
+			String tempI = Integer.toString(i);
+			boolean findFlag = false;
+			for(int j = 0; j < tempI.length(); j++) {
+				if(broken.contains(Character.toString(tempI.charAt(j)))) break;
 				
-//				while (temp < 10) {
-//					if (!brokenSet.contains(++temp))
-//						break;
-//					if(temp == 10) okFlag = false;
-//				}
-//			}
-//			if(!okFlag) {
-//				resultPLUS = 500000;
-//				break;
+				if(j == tempI.length() - 1) 
+					findFlag = true;
 			}
-			resultPLUS += temp * (int) Math.pow(10, i);
-			System.out.println(resultPLUS);
-			tempN %= (int)Math.pow(10, i);
-		}
-
-		// 작은 쪽으로 찾기
-		tempN = N;
-		okFlag = true;
-		for (int i = strLen - 1; i >= 0; i--) {
-			if(i == strLen - 1) temp = tempN / (int) Math.pow(10, i); // 처음에만 해당 값 그대로 사용
-			else temp = 9; // 첫 자리 아니면 9부터 제일 큰 값 찾아야함
-
-			if (brokenSet.contains(temp)) { // 고장난 키
-				for(int k = 1; k <= 9; k++) {
-					if(temp - k > 0) { // 작은 수중에 가장 큰 값 찾기 위함
-						if (!brokenSet.contains(temp - k)) {
-							temp -= k;
-							break;
-						}
-					}else {
-						if (!brokenSet.contains(9 + (temp - k))) {
-							temp = 9 + (temp - k);
-							i -= 1;
-							break;
-						}
-					}
-					
-				}
-//				while (temp >= 0) {
-//					if (!brokenSet.contains(--temp))
-//						break;
-//					if(temp == 0) 
-//						okFlag = false;
-//				}
-//			}
-//			if(!okFlag) {
-//				resultMINUS = 500000;
-//				break;
+			
+			if(findFlag) {
+				minNum = Integer.parseInt(tempI);
+				len = tempI.length();
+				break;
 			}
-			resultMINUS += temp * (int) Math.pow(10, i);
-			System.out.println(resultMINUS);
-			tempN %= (int)Math.pow(10, i);
 		}
+		minToUp = Math.abs(minNum - targetNum) + len;
+
+		// 이동하려는 채널보다 큰 쪽
+		int maxNum = 1000001, maxToDown;
+		for(int i = targetNum; i <= 1000000; i++) {
+			String tempI = Integer.toString(i);
+			boolean findFlag = false;
+			for(int j = 0; j < tempI.length(); j++) {
+				if(broken.contains(Character.toString(tempI.charAt(j)))) break;
+				
+				if(j == tempI.length() - 1) 
+					findFlag = true;
+			}
+			
+			if(findFlag) {
+				maxNum = Integer.parseInt(tempI);
+				len = tempI.length();
+				break;
+			}
+		}
+		maxToDown = Math.abs(maxNum - targetNum) + len;
 		
-		int plus = Math.abs(resultPLUS);
-		int minus = Math.abs(resultMINUS);
-		int result = min(plus, minus, diff, N);
-		
-		System.out.println(result);
-	}
-	
-	
-	static int min(int a, int b, int diff, int N) {
-		int na = Math.abs(a - N);
-		int nb = Math.abs(b - N);
-		if(na >= nb && diff >= nb) return nb + Integer.toString(b).length();
-		else if(nb >= diff && na >= diff) return diff;
-		else return na + Integer.toString(a).length();
+		if(maxToDown >= minToUp && onlyUpDown >= minToUp) System.out.println(minToUp);
+		else if(maxToDown >= onlyUpDown && minToUp >= onlyUpDown) System.out.println(onlyUpDown);
+		else System.out.println(maxToDown);
 	}
 }
