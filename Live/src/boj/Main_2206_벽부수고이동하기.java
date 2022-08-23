@@ -1,4 +1,4 @@
-package class03;
+package boj;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,10 +70,10 @@ public class Main_2206_벽부수고이동하기 {
 				if (map[nr][nc] == '0' && !visited[crashCount][nr][nc]) {
 					// 방문할 수 있는 위치이면서 빈칸이면 이동 가능
 					visited[crashCount][nr][nc] = true;
-					queue.add(new Integer[] { nr, nc, crashCount, depth + 1 });
+					queue.offer(new Integer[] { nr, nc, crashCount, depth + 1 });
 				} else if (map[nr][nc] == '1' && crashCount == 0) {
 					visited[crashCount+1][nr][nc] = true;
-					queue.add(new Integer[] { nr, nc, crashCount + 1, depth + 1 }); // 벽 뚫고 갈 때마다 +1
+					queue.offer(new Integer[] { nr, nc, crashCount + 1, depth + 1 }); // 벽 뚫고 갈 때마다 +1
 				}
 
 			}
