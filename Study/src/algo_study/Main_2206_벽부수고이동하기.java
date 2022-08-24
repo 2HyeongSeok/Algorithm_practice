@@ -1,4 +1,4 @@
-package boj;
+package algo_study;
 
 import java.io.BufferedReader;
 import java.io.IOException;
