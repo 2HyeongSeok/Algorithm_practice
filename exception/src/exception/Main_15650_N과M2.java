@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main_15649_N과M2 {
+public class Main_15650_N과M2 {
 	static StringBuilder sb = new StringBuilder();
 	static int[] selected;
 	public static void main(String[] args) throws IOException {

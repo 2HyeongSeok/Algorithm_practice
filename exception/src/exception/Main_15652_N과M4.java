@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main_15649_N과M3 {
+public class Main_15652_N과M4 {
 	static StringBuilder sb = new StringBuilder();
 	static int[] selected;
 	public static void main(String[] args) throws IOException {
@@ -15,12 +15,12 @@ public class Main_15649_N과M3 {
 		int M = Integer.parseInt(st.nextToken());
 		
 		selected = new int[M];
-		perm(N, M, 0);
+		comb(N, M, 0, 1);
 		
 		System.out.println(sb);
 	}
 	
-	static void perm(int N, int M, int count) {
+	static void comb(int N, int M, int count, int start) {
 		if(count == M) {
 			for(int i = 0; i < M; i++) {
 				sb.append(selected[i]).append(" ");
@@ -29,9 +29,9 @@ public class Main_15649_N과M3 {
 			return;
 		}
 		
-		for(int i = 1; i <= N; i++) {
+		for(int i = start; i <= N; i++) {
 			selected[count] = i;
-			perm(N, M, count + 1);
+			comb(N, M, count + 1, i);
 		}
 	}
 }
