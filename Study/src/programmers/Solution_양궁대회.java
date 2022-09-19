@@ -2,7 +2,7 @@ package programmers;
 
 import java.util.*;
 
-class Solution {
+class Solution_양궁대회 {
 	static int[] info, info_ryan, answer;
 	static int n, score_apeach, score_ryan, max_diff = 0;
 	static PriorityQueue<int[]> queue;
@@ -67,8 +67,6 @@ class Solution {
 		}
 
 		for (int i = start; i < 11; i++) {
-			// 딱 info(apeach가 맞춘 화살 수)보다 한 발만 더 맞추면 되니까
-			// 같을 때까지 더해서 확인함
 			info_ryan[i]++;
 			dfs(i, count + 1);
 			info_ryan[i]--;
