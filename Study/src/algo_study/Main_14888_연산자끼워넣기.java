@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class Main_14888_연산자끼워넣기 {
-	static char[] selected, opers;
-	static int[] arr;
+	static char[] selected;
+	static int[] arr, opers;
 	static int N, minVal = Integer.MAX_VALUE, maxVal = Integer.MIN_VALUE;
 	
 	public static void main(String[] args) throws Exception {
@@ -14,8 +14,7 @@ public class Main_14888_연산자끼워넣기 {
 		
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N];
-		opers = new char[N-1];
-		selected = new char[N-1];
+		opers = new int[4];
 		
 		st = new StringTokenizer(br.readLine(), " ");
 		for(int i = 0; i < N; i++) {
@@ -23,72 +22,44 @@ public class Main_14888_연산자끼워넣기 {
 		}
 		
 		st = new StringTokenizer(br.readLine(), " ");
-		int index = 0;
 		for(int i = 0; i < 4; i++) {
-			int count = Integer.parseInt(st.nextToken());
-			for(int j = 0; j < count; j++) {
-				char oper = '+';
-				
-				switch(i){
-					case 0:
-						oper = '+';
-						break;
-					case 1:
-						oper = '-';
-						break;
-					case 2:
-						oper = '*';
-						break;
-					case 3:
-						oper = '/';
-						break;
-				}
-				
-				opers[index++] = oper;
-			}
+			opers[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		perm(0, 0);
+		dfs(1, arr[0]);
 		System.out.println(maxVal);
 		System.out.println(minVal);
 	}
 	
-	static void perm(int count, int flag) {
-		if(count == N-1) {
-			int value = arr[0];
-			for(int i = 0; i < N-1; i++) {
-				switch(selected[i]) {
-				case '+':
-					value += arr[i+1];
-					break;
-				case '-':
-					value -= arr[i+1];
-					break;
-				case '*':
-					value *= arr[i+1];
-					break;
-				case '/':
-					if(value > 0) value /= arr[i+1];
-					else {
-						value = -value;
-						value /= arr[i+1];
-						value = -value;
-					}
-					break;
-				}
-			}
-			
+	static void dfs(int count, int value) {
+		if(count == N) {
 			minVal = minVal < value ? minVal : value;
 			maxVal = maxVal > value ? maxVal : value;
-			
 			return;
 		}
 		
-		for(int i = 0; i < N-1; i++) {
-			if((flag & 1 << i) != 0) continue;
+		for(int k = 0; k < 4; k++) {
+			if(opers[k] > 0) {
+				opers[k]--;
+				
+				switch(k) {
+				case 0:
+					dfs(count + 1, value + arr[count]);
+					break;
+				case 1:
+					dfs(count + 1, value - arr[count]);
+					break;
+				case 2:
+					dfs(count + 1, value * arr[count]);
+					break;
+				case 3:
+					dfs(count + 1, (-1) * ((-value) / arr[count]));
+					break;
+				}
+				
+				opers[k]++;
+			}
 			
-			selected[count] = opers[i];
-			perm(count + 1, flag | 1 << i);
 		}
 	}
 }
