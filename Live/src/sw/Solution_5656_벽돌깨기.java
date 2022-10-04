@@ -115,8 +115,6 @@ public class Solution_5656_벽돌깨기{
 			while(!q.isEmpty()) {
 				newMap[index--][c] = q.poll();
 			}
-			
-			
 		}
 	}
 
