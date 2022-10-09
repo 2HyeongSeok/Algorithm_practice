@@ -1,9 +1,9 @@
-package algorithm;
+package algo_study;
 
 import java.io.*;
 import java.util.*;
 
-public class Main_S1_9465_��ƼĿ {
+public class Main_S1_9465_스티커{
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
