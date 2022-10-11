@@ -59,7 +59,7 @@ public class Main_S1_9205_맥주마시면서걸어가기 {
 				if(nc == col || visited[nc] || map[col][nc] > 1000) continue;
 				
 				queue.offer(nc);
-				visited[col] = true;
+				visited[nc] = true;
 			}
 		}
 		
