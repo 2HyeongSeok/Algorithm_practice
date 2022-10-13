@@ -3,6 +3,7 @@ package exception;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Main_14500_테트로미노 {
@@ -21,6 +22,7 @@ public class Main_14500_테트로미노 {
 		row = Integer.parseInt(st.nextToken());
 		col = Integer.parseInt(st.nextToken());
 		
+		visited = new boolean[row][col];
 		map = new int[row][col];
 		for(int i = 0; i < row; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
@@ -31,36 +33,9 @@ public class Main_14500_테트로미노 {
 		
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
-				visited = new boolean[row][col];
 				visited[i][j] = true;
-				dfs(i, j, 0, 0);
-			}
-		}
-		
-		for(int i = 1; i < row - 1; i++) { 
-			int temp;
-			for(int j = 0; j < col - 1; j++) { // 'ㅏ' 모양
-				temp = map[i-1][j] + map[i][j] + map[i+1][j] + map[i][j+1];
-				maxValue = maxValue > temp ? maxValue : temp;
-			}
-			
-			for(int j = col - 1; j > 0; j--) { // 'ㅓ' 모양
-				temp = map[i-1][j] + map[i][j] + map[i+1][j] + map[i][j-1];
-				maxValue = maxValue > temp ? maxValue : temp;
-			}
-		}
-		
-		for(int j = 1; j < col - 1; j++) { 
-			int temp;
-			for(int i = 0; i < row - 1; i++) { // 'ㅜ' 모양
-				temp = map[i][j-1] + map[i][j] + map[i][j+1] + map[i+1][j];
-				maxValue = maxValue > temp ? maxValue : temp;
-			}
-			
-			temp = 0;
-			for(int i = row - 1; i > 0; i--) { // 'ㅗ' 모양
-				temp = map[i][j-1] + map[i][j] + map[i][j+1] + map[i-1][j];
-				maxValue = maxValue > temp ? maxValue : temp;
+				dfs(i, j, 1, map[i][j]);
+				visited[i][j] = false;
 			}
 		}
 		
@@ -73,7 +48,32 @@ public class Main_14500_테트로미노 {
 			return;
 		}
 		
-		for(int k = 0; k < 4; k++) {
+		if(count == 2) { // ㅏ, ㅓ, ㅜ, ㅗ 모양을 위해서 bfs
+			ArrayList<Integer> list = new ArrayList<>();
+			
+			int sum = 0;
+			for(int k = 0; k < 4; k++) { // 모든 케이스 가능(ㅏ,ㅓ,ㅜ,ㅗ 제외)
+				int nr = r + dr[k];
+				int nc = c + dc[k];
+				
+				if(nr < 0 || nr >= row || nc < 0 || nc >= col || visited[nr][nc]) continue;
+				
+				list.add(map[nr][nc]);
+				sum += map[nr][nc];
+			}
+			
+			if(list.size() == 2) {
+				maxValue = maxValue > sum + value ? maxValue : sum + value;
+			}else if(list.size() == 3){
+				int max = 0;
+				for(int i = 0; i < 3; i++) {
+					max = max > sum - list.get(i) ? max : sum - list.get(i);
+				}
+				maxValue = maxValue > max + value ? maxValue : max + value;
+			}
+		}
+		
+		for(int k = 0; k < 4; k++) { // 모든 케이스 가능(ㅏ,ㅓ,ㅜ,ㅗ 제외)
 			int nr = r + dr[k];
 			int nc = c + dc[k];
 			
@@ -81,10 +81,9 @@ public class Main_14500_테트로미노 {
 			
 			if(!visited[nr][nc]) {
 				visited[nr][nc] = true;
-				dfs(nr, nc, count + 1, value + map[r][c]);
+				dfs(nr, nc, count + 1, value + map[nr][nc]);
 				visited[nr][nc] = false;
 			}
 		}
-		
 	}
 }
