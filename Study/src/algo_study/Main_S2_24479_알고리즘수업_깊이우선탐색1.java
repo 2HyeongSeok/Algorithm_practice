@@ -7,7 +7,7 @@ public class Main_S2_24479_알고리즘수업_깊이우선탐색1 {
 	static int N, M, R, idx = 1;
 	static boolean[] visited;
 	static int[] list;
-	static ArrayList[] arrList;
+	static ArrayList<Integer>[] arrList;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
