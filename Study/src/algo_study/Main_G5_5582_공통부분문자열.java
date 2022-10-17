@@ -35,7 +35,7 @@ public class Main_G5_5582_공통부분문자열 {
 					count++;
 					
 					// 마지막까지 갔으면 갱신 해봐야함
-					if(j == i + shorts.length) maxLen = maxLen > count ? maxLen : count;
+					if(j == i + shorts.length - 1) maxLen = maxLen > count ? maxLen : count;
 				} else {
 					// 갱신 후 초기화
 					maxLen = maxLen > count ? maxLen : count;
